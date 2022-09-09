@@ -4,7 +4,7 @@
 #include <string.h>
 // #include <time.h>
 
-#define DIM 50
+#define DIM 30
 
 int dimension;
 unsigned int cur_words;
@@ -20,8 +20,8 @@ enum nodeColor {
 
 struct main_tree {
     int color;
-    char *string;
     struct main_tree *link[2];
+    char string[DIM];
 };
 
 struct main_new_tree {
@@ -99,7 +99,7 @@ struct no_char_tree *insert_no_char_tree(struct no_char_tree *root, char c) {
 void main_insert(char *string) {
     if (!main_t_structure) {
         struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-        new_main_node->string = malloc(dimension * sizeof(char));
+        // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
         // memcpy(new_main_node->string, string, dimension);
         strcpy(new_main_node->string, string);
         new_main_node->color = RED;
@@ -123,7 +123,7 @@ void main_insert(char *string) {
         dir[ht++] = index;
     }
     struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-    new_main_node->string = malloc(dimension * sizeof(char));
+    // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
     // memcpy(new_main_node->string, string, dimension);
     strcpy(new_main_node->string, string);
     new_main_node->color = RED;
@@ -198,7 +198,7 @@ void main_insert2(char *string) {
     ptr = main_t_structure;
     if (!main_t_structure) {
         struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-        new_main_node->string = malloc(dimension * sizeof(char));
+        // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
         // memcpy(new_main_node->string, string, dimension);
         strcpy(new_main_node->string, string);
         new_string = new_main_node->string;
@@ -220,7 +220,7 @@ void main_insert2(char *string) {
         dir[ht++] = index;
     }
     struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-    new_main_node->string = malloc(dimension * sizeof(char));
+    // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
     // memcpy(new_main_node->string, string, dimension);
     strcpy(new_main_node->string, string);
     new_string = new_main_node->string;
