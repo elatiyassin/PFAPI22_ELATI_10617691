@@ -4,7 +4,7 @@
 #include <string.h>
 // #include <time.h>
 
-#define DIM 30
+#define DIM 20
 
 int dimension;
 unsigned int cur_words;
@@ -99,8 +99,6 @@ struct no_char_tree *insert_no_char_tree(struct no_char_tree *root, char c) {
 void main_insert(char *string) {
     if (!main_t_structure) {
         struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-        // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
-        // memcpy(new_main_node->string, string, dimension);
         strcpy(new_main_node->string, string);
         new_main_node->color = RED;
         new_main_node->link[0] = new_main_node->link[1] = NULL;
@@ -123,8 +121,6 @@ void main_insert(char *string) {
         dir[ht++] = index;
     }
     struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-    // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
-    // memcpy(new_main_node->string, string, dimension);
     strcpy(new_main_node->string, string);
     new_main_node->color = RED;
     new_main_node->link[0] = new_main_node->link[1] = NULL;
@@ -198,8 +194,6 @@ void main_insert2(char *string) {
     ptr = main_t_structure;
     if (!main_t_structure) {
         struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-        // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
-        // memcpy(new_main_node->string, string, dimension);
         strcpy(new_main_node->string, string);
         new_string = new_main_node->string;
         new_main_node->color = RED;
@@ -220,8 +214,6 @@ void main_insert2(char *string) {
         dir[ht++] = index;
     }
     struct main_tree *new_main_node = malloc(sizeof(struct main_tree));
-    // new_main_node->string = (char*) malloc(sizeof(char)*(strlen(string)+1));
-    // memcpy(new_main_node->string, string, dimension);
     strcpy(new_main_node->string, string);
     new_string = new_main_node->string;
     new_main_node->color = RED;
@@ -382,10 +374,6 @@ void main_new_insert(char *string) {
     new_tree->color = BLACK;
 }
 
-// void string_print(char *a, int size) {
-//     fwrite(a, 1, size, stdout);
-// }
-
 bool main_search(struct main_tree *l, char s[DIM]) {
     if (l != NULL) {
         int comparison = strcmp(s, l->string);
@@ -405,7 +393,6 @@ void match_print_active(struct main_new_tree *l) {
         match_print_active(l->link[0]);
         if (l->active) {
             fwrite(l->string, 1, dimension, stdout);
-            // string_print(l->string, dimension);
             putchar('\n');
         }
         match_print_active(l->link[1]);
@@ -416,7 +403,6 @@ void match_print_active_old(struct main_tree *l) {
     if (l != NULL) {
         match_print_active_old(l->link[0]);
         fwrite(l->string, 1, dimension, stdout);
-        // string_print(l->string, dimension);
         putchar('\n');
         match_print_active_old(l->link[1]);
     }
@@ -443,36 +429,6 @@ int string_count_char(char c, const char ref[DIM]) {
     return n;
 }
 
-
-// int string_atoi(const char *s) {
-//     int result = 0;
-//     for (int i = 0; s[i] != '\0' && s[i] != '\n'; i++) {
-//         result = result * 10 + (s[i] - '0');
-//     }
-//     return result;
-// }
-
-// bool f1(char c, char *s) {
-//     return string_search_char(c, s);
-// }
-
-// bool f2(char c, const char *s, int n) {
-//     return s[n] != c;
-// }
-
-// bool f3(char c, const char *s, int pos) {
-//     return s[pos] == c;
-// }
-
-// bool f4(char c, char *s, int n) {
-//     return string_count_char(c, s) < n;
-// }
-
-// bool f5(char c, char *s, int n) {
-//     return string_count_char(c, s) > n;
-// }
-
-
 bool filter1(char *s, struct no_char_tree *l) {
     while (l != NULL) {
         for (int i = 0; i < dimension; i++) {
@@ -487,7 +443,6 @@ bool filter1(char *s, struct no_char_tree *l) {
 
 bool filter2(char *s, struct node *l) {
     while (l != NULL) {
-        // if (f2(l->c, s, l->n)) {
         if(s[l->n] != l->c){
             return true;
         }
@@ -499,11 +454,9 @@ bool filter2(char *s, struct node *l) {
 
 bool filter4(char *s, struct composite_node *l) {
     while (l != NULL) {
-        // if (f3(l->c, s, l->pos)){
         if(s[l->pos] == l->c){
             return true;
         }
-        // if (f4(l->c, s, l->n)) {
         if(string_count_char(l->c, s)<(l->n)){
             return true;
         }
@@ -514,11 +467,9 @@ bool filter4(char *s, struct composite_node *l) {
 
 bool filter5(char *s, struct composite_node *l) {
     while (l != NULL) {
-        // if (f3(l->c, s, l->pos))
         if(s[l->pos] == l->c){
             return true;
         }
-        // if (f5(l->c, s, l->n)) {
         if(string_count_char(l->c, s)>(l->n)){
             return true;
         }
@@ -540,75 +491,6 @@ bool to_filter(char *s, struct no_char_tree *t1, struct node *t2, struct composi
     return false;
 }
 
-// bool filter1_numbered(char *s, struct no_char_tree *l, int v) {
-//     while (v != 0 && l != NULL) {
-//         for (int i = 0; i < dimension; i++) {
-//             if (l->c == s[i]){
-//                 return true;
-//             }
-//         }
-//         v--;
-//         l = l->next;
-//     }
-//     return false;
-// }
-
-// bool filter2_numbered(char *s, struct node *l, int v) {
-//     while (v != 0 && l != NULL) {
-//         // if (f2(l->c, s, l->n)) {
-//         if(s[l->n] != l->c){
-//             return true;
-//         }
-//         v--;
-//         l = l->next;
-//     }
-//     return false;
-// }
-
-
-// bool filter4_numbered(char *s, struct composite_node *l, int v) {
-//     while (v != 0 && l != NULL) {
-//         // if (f3(l->c, s, l->pos))
-//         if(s[l->pos] == l->c)
-//             return true;
-//         // if (f4(l->c, s, l->n)) {
-//         if(string_count_char(l->c, s)<l->n){
-//             return true;
-//         }
-//         v--;
-//         l = l->next;
-//     }
-//     return false;
-// }
-
-// bool filter5_numbered(char *s, struct composite_node *l, int v) {
-//     while (v != 0 && l != NULL) {
-//         // if (f3(l->c, s, l->pos))
-//         if(s[l->pos] == l->c)
-//             return true;
-//         // if (f5(l->c, s, l->n)) {
-//         if(string_count_char(l->c, s)>l->n){
-//             return true;
-//         }
-//         v--;
-//         l = l->next;
-//     }
-//     return false;
-// }
-
-// bool to_filter_numbered(char *s, struct no_char_tree *t1, struct node *t2, struct composite_node *t4, struct composite_node *t5,
-//                         int v1, int v2, int v4, int v5) {
-//     if (filter2_numbered(s, t2, v2))
-//         return true;
-//     if (filter4_numbered(s, t4, v4))
-//         return true;
-//     if (filter5_numbered(s, t5, v5))
-//         return true;
-//     if (filter1_numbered(s, t1, v1))
-//         return true;
-//     return false;
-// }
-
 void filter_main(struct main_new_tree *t, struct no_char_tree *t1, struct node *t2,
                                   struct composite_node *t4, struct composite_node *t5) {
     if (t != NULL) {
@@ -623,18 +505,6 @@ void filter_main(struct main_new_tree *t, struct no_char_tree *t1, struct node *
         filter_main(t->link[1], t1, t2, t4, t5);
     }
 }
-
-
-// void new_insert_true() {
-//     char str_in[DIM];
-//     // fgets(str_in, DIM, stdin);
-//     string_read(str_in);
-//     while (str_in[0] != '+' && str_in[1] != 'i') {
-//         main_insert(str_in);
-//         // fgets(str_in, DIM, stdin);
-//         string_read(str_in);
-//     }
-// }
 
 void insert_new_tree(struct main_tree *t, struct no_char_tree *t1, struct node *t2, struct composite_node *t4, struct composite_node *t5) {
     if (t != NULL) {
@@ -664,12 +534,6 @@ void free_tree_old(struct main_tree *t) {
 }
 
 void free_t1(struct no_char_tree *l) {
-    // struct no_char_tree *temp;
-    // while (l != NULL) {
-    //     temp = l;
-    //     l = l->next;
-    //     free(temp);
-    // }
     if(l!=NULL){
         free_t1(l->next);
         free(l);
@@ -677,12 +541,6 @@ void free_t1(struct no_char_tree *l) {
 }
 
 void free_t2(struct node *l) {
-    // struct node *temp;
-    // while (l != NULL) {
-    //     temp = l;
-    //     l = l->next;
-    //     free(temp);
-    // }
     if(l!=NULL){
         free_t2(l->next);
         free(l);
@@ -690,12 +548,6 @@ void free_t2(struct node *l) {
 }
 
 void free_t4_t5(struct composite_node *l) {
-    // struct composite_node *temp;
-    // while (l != NULL) {
-    //     temp = l;
-    //     l = l->next;
-    //     free(temp);
-    // }
     if(l!=NULL){
         free_t4_t5(l->next);
         free(l);
@@ -705,19 +557,15 @@ void free_t4_t5(struct composite_node *l) {
 void match_new() {
     cur_words = 0;
     char ref[DIM];
-    // fgets(ref, DIM, stdin);
     string_read(ref);
     char str_in[DIM];
-    // fgets(str_in, DIM, stdin);
     string_read(str_in);
     int max_words = atoi(str_in);
     struct no_char_tree *t1 = NULL;
     struct node *t2 = NULL;
     struct composite_node *t4 = NULL;
     struct composite_node *t5 = NULL;
-    // int v1 = 0, v2 = 0, v4 = 0, v5 = 0;
     new_tree = NULL;
-    // fgets(str_in, DIM, stdin);
     string_read(str_in);
     while (new_tree == NULL) {
         if (str_in[0] == '+' && str_in[1] == 'n') {
@@ -726,21 +574,16 @@ void match_new() {
             return;
         } else if (str_in[0] == '+' && str_in[1] == 's') {
             match_print_active_old(main_t_structure);
-            // fgets(str_in, DIM, stdin);
             string_read(str_in);
         } else if (str_in[0] == '+' && str_in[1] == 'i') {
-            // fgets(str_in, DIM, stdin);
-            // printf("insert");
             string_read(str_in);
             while (!(str_in[0] == '+' && str_in[1] == 'i')) {
                 main_insert(str_in);
-                // fgets(str_in, DIM, stdin);
                 string_read(str_in);
             }
             string_read(str_in);
         } else if (strcmp(str_in, ref) == 0) {
             fwrite("ok\n", 1, 3, stdout);
-            // string_print("ok\n", 3);
             free_t1(t1);
             free_t2(t2);
             free_t4_t5(t4);
@@ -788,7 +631,6 @@ void match_new() {
             printf("\n%d\n", cur_words);
             if(max_words == 0){
                 fwrite("ko\n", 1, 3, stdout);
-                // string_print("ko\n", 3);
                 free_t1(t1);
                 free_t2(t2);
                 free_t4_t5(t4);
@@ -798,7 +640,6 @@ void match_new() {
             }
         } else if (max_words == 0){
                 fwrite("ko\n", 1, 3, stdout);
-                // string_print("ko\n", 3);
                 free_t1(t1);
                 free_t2(t2);
                 free_t4_t5(t4);
@@ -807,8 +648,6 @@ void match_new() {
                 return;
         } else {
             fwrite("not_exists\n", 1, 11, stdout);
-            // string_print("not_exists\n", 11);
-            // fgets(str_in, DIM, stdin);
             string_read(str_in);
         }
     }
@@ -820,8 +659,6 @@ void match_new() {
         } else if (str_in[0] == '+' && str_in[1] == 's') {
             match_print_active(new_tree);
         } else if (str_in[0] == '+' && str_in[1] == 'i') {
-            // fgets(str_in, DIM, stdin);
-            // printf("insert");
             string_read(str_in);
             while (!(str_in[0] == '+' && str_in[1] == 'i')) {
                 main_insert2(str_in);
@@ -829,12 +666,10 @@ void match_new() {
                     main_new_insert(new_string);
                     cur_words++;
                 }
-                // fgets(str_in, DIM, stdin);
                 string_read(str_in);
             }
         } else if (strcmp(str_in, ref) == 0) {
                 fwrite("ok\n", 1, 3, stdout);
-                // string_print("ok\n", 3);
                 break;
         } else if (main_search(main_t_structure, str_in) == true) {
             max_words--;
@@ -845,12 +680,10 @@ void match_new() {
                     if (string_search_char(str_in[i], ref) == false) {
                         putchar('/');
                         t1 = insert_no_char_tree(t1, str_in[i]);
-                        // v1++;
                     } else {
                         if (str_in[i] == ref[i]) {
                             putchar('+');
                             t2 = insert_node(t2, str_in[i], i);
-                            // v2++;
                         } else {
                             int x = 0, y = 0, z = 0;
                             for (int j = 0; j < dimension; ++j) {
@@ -867,31 +700,22 @@ void match_new() {
                             if (y <= x - z) {
                                 putchar('|');
                                 t4 = insert_node2(t4, str_in[i], z + y, i);
-                                // v4++;
                             } else {
                                 putchar('/');
                                 t5 = insert_node2(t5, str_in[i], x, i);
-                                // v5++;
                             }
                         }
                     }
                 }
             }
-            // free(new_tree);
-            // new_tree = NULL;
-            // cur_words = 0;
-            // insert_new_tree(main_t_structure, t1, t2, t4, t5);
             filter_main(new_tree, t1, t2, t4, t5);
-            // printf("è ritornato\n");
             printf("\n%d\n", cur_words);
             if (max_words == 0) {
                 fwrite("ko\n", 1, 3, stdout);
-                // string_print("ko\n", 3);
                 break;
             }
         } else {
             fwrite("not_exists\n", 1, 11, stdout);
-            // string_print("not_exists\n", 11);
         }
     }
     free_t1(t1);
@@ -906,7 +730,6 @@ int main() {
     // clock_t begin = clock();
     main_t_structure = NULL;
     char str_in[DIM];
-    // fgets(str_in, DIM, stdin);
     string_read(str_in);
     dimension = atoi(str_in);
     string_read(str_in);
@@ -921,7 +744,6 @@ int main() {
                 string_read(str_in);
                 while (!(str_in[0] == '+' && str_in[1] == 'i')) {
                     main_insert(str_in);
-                    // fgets(str_in, DIM, stdin);
                     string_read(str_in);
                 }
         } else if(str_in[0] == '+' && str_in[1] == 's') {
